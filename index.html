@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="aklamioApp" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aklamio autocomplete</title>
+  <link rel="stylesheet" href="foundation.css" />
+  <script src="angular.js"></script>
+  <script src="toArrayFilter.js"></script>
+  <script src="unique.js"></script>
+  <script src="app.js"></script>
+  <style>
+  body {
+    margin-top: 30px;
+  }
+  @media only screen and (min-width: 64.063em) {
+    td.columns {
+      float: none;
+    }
+  }
+  </style>
+</head>
+
+<body ng-controller="MainCtrl as mainCtrl">
+  <div class="row">
+    <div class="large-6 small-9 columns">
+      <input type="text" ng-model="searchText" class="large-6 columns" />
+    </div>
+    <div class="large-6 small-3 columns">
+      <select ng-model="country" ng-options="country for country in mainCtrl.countries" class="large-6 columns"></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <table>
+        <thead>
+          <tr>
+            <td>Shop</td>
+            <td class="hide-for-small">Country</td>
+            <td class="hide-for-small">Link</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="todo in mainCtrl.items | filter:searchText | filter:{country: country}">
+            <td class="small-12 columns"><span ng-bind="todo.label"></span></td>
+            <td class="small-12 columns"><span ng-bind="todo.country"></span></td>
+            <td class="small-12 columns"><span ng-bind="todo.link"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+
