@@ -4,7 +4,7 @@
       var self = this;
       self.items = [];
       self.countries = [];
-      $http.get('/auto_data.json').then(function(response) {
+      $http.get('auto_data.json').then(function(response) {
         self.items = toArrayFilter(response.data);
         self.items = filterFilter(self.items, {type: 'promotion'});
         angular.forEach(self.items, function(k, v) {
